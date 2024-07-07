@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'uretsatapp/style.css' %}">
+    <title>ÜretSat</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="cont">
+                <a href="/"><h1>ÜretSat</h1></a>
+                <ul>
+                    <li><a href="/alisveris">Alışveriş</a></li>
+                    <li><a href="/profil">Profil</a></li>
+                    <li><a href="/siparislerim">Siparişlerim</a></li>
+                    <li><a href="/sepet">Sepet</a></li>
+                    <li><a href="/cikis">Çıkış Yap</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="urun-bilgileri urunlerim">
+        <div class="cont">
+            <h1>Sepet</h1>
+            <div class="urunler">
+                {% for u in urunler %}
+                    <div class="urun">
+                        <div class="resim">
+                            <img src="{{u.resim}}">
+                        </div>
+                        <div class="bilgi">
+                            <ul>
+                                <li><p>id:</p><p>{{u.id}}</p></li>
+                                <li><p>ad:</p><p>{{u.ad}}</p></li>
+                                <li><p>tur:</p><p>{{u.tur}}</p></li>
+                                <li><p>stok:</p><p>{{u.stok}}</p></li>
+                                <li><p>fiyat:</p><p>{{u.fiyat}}</p></li>
+                                <li><p>detay:</p><p>{{u.detay}}</p></li>
+                            </ul>
+                        </div>
+                        <div class="btn">
+                            <a href="/sepet/sil/{{u.id}}/">Sil</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if urunler|length > 0 %}
+                <div class="odeme">
+                    <form action="  /odeme/" method="post">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Kart Sahibinin ismi">
+                        <input type="text" placeholder="16 hanelik cart no">
+                        <div>
+                            <input class="min" type="text" placeholder="ay">
+                            <input class="min" type="text" placeholder="yil">
+                            <input class="min" type="text" placeholder="ccv kodu">
+                        </div>
+                        <input type="submit" value="öde">
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

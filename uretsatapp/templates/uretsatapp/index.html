@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'uretsatapp/style.css' %}">
+    <title>ÜretSat</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="cont">
+                <a href="/"><h1>ÜretSat</h1></a>
+                <ul>
+                    <li><a href="/giris">Giriş Yap</a></li>
+                    <li><a href="/kayit">Hesap Oluştur</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="hero">
+            <div class="cont">
+                <div class="slogan">
+                    <p>Üretici ile Esnaf Buluşmasının En KOLAY Yolu</p>
+                    <h1>ÜretSat</h1>
+                </div>
+                <div class="image">
+                    <img src="{% static 'uretsatapp/img/hero.png' %}">
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Tüm Haklar Saklıdır © ÜretSat - 2024</p>
+    </footer>
+</body>
+</html>

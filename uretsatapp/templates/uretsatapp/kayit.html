@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'uretsatapp/style.css' %}">
+    <title>ÜretSat</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="cont">
+                <a href="/"><h1>ÜretSat</h1></a>
+                <ul>
+                    <li><a href="/giris">Giriş Yap</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="kayit">
+        <div class="cont">
+            <h1>Hesap Oluştur</h1>
+            <form action="/kayit/" method="post">
+                {% if messages %}
+                <div class="messages">
+                    {% for m in messages %}
+                        <p class="msg-{{m.tags}}">{{m}} <span onclick="this.parentElement.remove()">✖</span></p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-item radio-btn">
+                    <input type="radio" name="tur" id="uretici" value="uretici" {% if bilgiler.tur == "uretici" %} checked {% endif %}>
+                    <label for="uretici">Üretici</label>
+                    <input type="radio" name="tur" id="esnaf" value="esnaf" {% if bilgiler.tur == "esnaf" or not bilgiler.tur %} checked {% endif %}>
+                    <label for="esnaf">Esnaf</label>
+                </div>
+                <div class="form-item">
+                    <label for="ad">Ad:</label>
+                    <input type="text" id="ad" name="ad" value="{{bilgiler.ad}}">
+                </div>
+                <div class="form-item">
+                    <label for="soyad">Soyad:</label>
+                    <input type="text" id="soyad" name="soyad" value="{{bilgiler.soyad}}">
+                </div>
+                <div class="form-item">
+                    <label for="kullaniciadi">Kullanıcıadı:</label>
+                    <input type="text" id="kullaniciadi" name="kullaniciadi" value="{{bilgiler.kullaniciadi}}">
+                </div>
+                <div class="form-item">
+                    <label for="sifre">Şifre:</label>
+                    <input type="password" id="sifre" name="sifre" value="{{bilgiler.sifre}}">
+                </div>
+                <div class="form-item">
+                    <label for="tel">Tel No:</label>
+                    <input type="text" id="tel" name="tel" value="{{bilgiler.tel}}">
+                </div>
+                <div class="form-item">
+                    <input type="submit" value="Hesap Oluştur">
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

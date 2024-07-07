@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'uretsatapp/style.css' %}">
+    <title>ÜretSat</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="cont">
+                <a href="/"><h1>ÜretSat</h1></a>
+                <ul>
+                    <li><a href="/alisveris">Alışveriş</a></li>
+                    <li><a href="/profil">Profil</a></li>
+                    <li><a href="/siparislerim">Siparişlerim</a></li>
+                    <li><a href="/sepet">Sepet</a></li>
+                    <li><a href="/cikis">Çıkış Yap</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="urun-bilgileri">
+        <div class="cont">
+            <h1>Esnaf Profil Bilgileri</h1>
+            {% if messages %}
+            <div class="messages">
+                {% for m in messages %}
+                <p class="msg-{{m.tags}}">{{m}} <span onclick="this.parentElement.remove()">✖</span></p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <form action="/profil/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="img">
+                    <img class="profile preview" src="{{resim}}">
+                    <div class="btn">
+                        <label for="imginput">Değiştir</label> | <a href="/profilResimKaldir">Kaldır</a>
+                        <input hidden type="file" name="resim" id="imginput">
+                    </div>
+                    <p>{{kullaniciadi}}</p>
+                </div>
+                <div class="data">
+                    <div class="form-item">
+                        <label for="ad">Ad:</label>
+                        <input type="text" id="ad" name="ad" value="{{ad}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="soyad">Soyad:</label>
+                        <input type="text" id="soyad" name="soyad" value="{{soyad}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="konum">Konum:</label>
+                        <input type="text" id="konum" name="konum" value="{{konum}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="eskisifre">Eski Şifre:</label>
+                        <input type="password" id="eskisifre" name="eskisifre">
+                    </div>
+                    <div class="form-item">
+                        <label for="yenisifre">Yeni Şifre:</label>
+                        <input type="password" id="yenisifre" name="yenisifre">
+                    </div>
+                    <div class="form-item">
+                        <label for="tel">Tel:</label>
+                        <input type="text" id="tel" name="tel" value="{{tel}}">
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" value="Güncelle">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="{% static 'uretsatapp/resim.js' %}"></script>
+    </main>
+</body>
+</html>

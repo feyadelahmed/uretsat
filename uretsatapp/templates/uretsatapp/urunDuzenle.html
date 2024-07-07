@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'uretsatapp/style.css' %}">
+    <title>ÜretSat</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="cont">
+                <a href="/"><h1>ÜretSat</h1></a>
+                <ul>
+                    <li><a href="/profil">Profil</a></li>
+                    <li><a href="/urunlerim">Ürünlerim</a></li>
+                    <li><a href="/cikis">Çıkış Yap</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="urun-bilgileri">
+        <div class="cont">
+            <h1>Ürün Düzenle</h1>
+            {% if messages %}
+            <div class="messages">
+                {% for m in messages %}
+                <p class="msg-{{m.tags}}">{{m}} <span onclick="this.parentElement.remove()">✖</span></p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <form action="/urunDuzenle/{{id}}/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="img">
+                    <img class="preview" src="{{resim}}">
+                    <div class="btn">
+                        <label for="imginput">Değiştir</label>
+                        <input type="file" accept=".png,.jpg,.jpeg" name="resim" id="imginput" hidden>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="form-item">
+                        <label for="ad">Ürün Adı:</label>
+                        <input required type="text" id="ad" name="ad" value="{{ad}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="tur">Ürün Türü:</label>
+                        <input required type="text" id="tur" name="tur" value="{{tur}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="stok">Stok Durumu:</label>
+                        <input required type="text" id="stok" name="stok" value="{{stok}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="fiyat">Ürün Fiyatı:</label>
+                        <input required type="text" id="fiyat" name="fiyat" value="{{fiyat}}">
+                    </div>
+                    <div class="form-item">
+                        <label for="detay">Detaylar:</label>
+                        <textarea required name="detay" id="detay">{{detay}}</textarea>
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" value="Düzenle">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="{% static 'uretsatapp/resim.js' %}"></script>
+    </main>
+</body>
+</html>
